@@ -5,7 +5,7 @@ from azure.eventhub.aio import EventHubProducerClient
 from azure.eventhub import EventData
 
 # PASTE YOUR CONNECTION STRING AND EVENT HUB NAME HERE
-CONNECTION_STR = "Endpoint=sb://urbanprojecteventhub.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=j5uSbtKez07rrKeeJbll+UlYVaEk4EpGA+AEhJQ0FFg="
+CONNECTION_STR = "Paste your connection string key"
 EVENT_HUB_NAME = "ecom-clicks"
 
 async def run():
@@ -21,5 +21,6 @@ async def run():
             await producer.send_batch(event_data_batch)
             print(f"Sent click: {event}")
             await asyncio.sleep(2) # Send a message every 2 seconds
+
 
 asyncio.run(run())
