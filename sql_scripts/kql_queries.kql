@@ -1,0 +1,42 @@
+
+live_clicks
+| summarize ClickCount = count() by bin(EventEnqueuedUtcTime, 1m)
+| order by EventEnqueuedUtcTime desc
+
+
+live_mentions
+| extend sentiment = case(
+    message contains "love" or message contains "fast" or message contains "great", "Positive",
+    message contains "down" or message contains "bad" or message contains "slow", "Negative",
+    "Neutral"
+  )
+| summarize MentionCount = count() by sentiment
+
+
+.create function ClicksPerMinute() {
+    live_clicks
+    | summarize ClickCount = count() by bin(EventEnqueuedUtcTime, 1m)
+    | order by EventEnqueuedUtcTime desc
+}
+
+.create function SentimentSummary() {
+    live_mentions
+    | extend sentiment = case(
+        message has_any ("love", "fast", "great", "amazing"), "Positive",
+        message has "gone down" or message has_any ("bad", "slow", "poor"), "Negative",
+        "Neutral"
+      )
+    | summarize MentionCount = count() by sentiment
+}
+
+.create function no_of_clicks() {
+    live_clicks
+    | where EventEnqueuedUtcTime > ago(2m)
+    | count
+
+}live_mentions
+| 
+
+live_clicks
+| where EventEnqueuedUtcTime > ago(2m)
+| count
