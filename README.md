@@ -12,55 +12,6 @@ The solution follows a modern data platform architecture, ingesting both batch a
 
 ![Architecture Diagram](./architecture/architecture_diagram.png)
 
-```mermaid
-graph LR
-    subgraph "Data Sources"
-        A[Batch Data <br/>(CSV, Parquet)]
-        B[Real-Time Streams <br/>(JSON Events)]
-    end
-
-    subgraph "Microsoft Fabric Ecosystem"
-        subgraph "Ingestion"
-            C[Data Factory Pipeline]
-            D[Eventstream]
-        end
-
-        subgraph "Storage & Transformation"
-            subgraph "Lakehouse (Medallion)"
-                E[Bronze Layer] -->|PySpark| F[Silver Layer]
-                F -->|PySpark| G[Gold Layer]
-            end
-        end
-
-        subgraph "Analytics & Serving"
-            H[Data Warehouse]
-            I[KQL Database]
-        end
-
-        subgraph "Automation"
-            J[Data Activator]
-        end
-    end
-
-    subgraph "Business Outcomes"
-        K[Power BI Hybrid Report <br/>(Historical & Real-Time)]
-        L[Automated Alerts <br/>(Email, Teams)]
-    end
-
-    %% --- Data Flow Connections ---
-    A --> C --> E
-    B --> D
-    D --> E
-    D --> I
-
-    G --> H
-
-    H --> K
-    I --> K
-
-    I --> J
-    J --> L
-```
 
 
 ## 3. Tech Stack
@@ -80,4 +31,4 @@ graph LR
 
 ## 5. Contact
 
-Connect with me on [LinkedIn]([linkedin.com/in/manoj-k-498b70124](https://www.linkedin.com/in/manoj-k-498b70124?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BNMbihSQSS3aCZaT1eSasjw%3D%3D))!
+Connect with me on [LinkedIn](https://www.linkedin.com/in/manoj-k-498b70124?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BNMbihSQSS3aCZaT1eSasjw%3D%3D)!
